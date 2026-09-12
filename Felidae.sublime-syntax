@@ -44,7 +44,7 @@ contexts:
       scope: constant.numeric.felidae
 
   keywords:
-    - match: '\b(extend|where|if|else|return|lambda|then)\b'
+    - match: '\b(class|extend|where|if|else|return|lambda|then|end)\b'
       scope: keyword.control.felidae
     - match: '\bimport\b'
       scope: keyword.control.import.felidae
