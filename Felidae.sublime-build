@@ -5,7 +5,7 @@
     "variants": [
         {
             "name": "Check",
-            "cmd": ["felidae_debug", "--check", "$file"]
+            "cmd": ["felidae", "--check", "$file"]
         },
         {
             "name": "Visualize",

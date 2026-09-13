@@ -18,7 +18,7 @@ directly on buffer text.
   "Format Document" and `intellij-idea-extension`'s "Format Felidae File",
   so all editors in this repository normalize `.fx` files the same way.
 - `Felidae.sublime-build` — `Tools > Build` runs the current file with
-  `felidae`; build variants (`Ctrl+Shift+B`) run `felidae_debug --check`
+  `felidae`; build variants (`Ctrl+Shift+B`) run `felidae --check`
   and `celidae --html`.
 - A few starter snippets (`import`, `fact`, `rule`, `method`) ported from
   `vs-code-extension/snippets/felidae.json`.
@@ -36,9 +36,8 @@ directory as `Felidae`:
 
 ## Configuration
 
-The build system's `felidae` / `felidae_debug` / `celidae` commands are
+The build system's `felidae` / `celidae` commands are
 resolved via `$PATH` by default. Edit `Felidae.sublime-build` (`Tools >
 Build System > Edit`) to point at absolute executable paths if they are not
-on `$PATH`, matching `felidae.interpreterPath` /
-`felidae.debugInterpreterPath` / `felidae.celidaePath` in
-`vs-code-extension`.
+on `$PATH`. The build system and LSP use argument arrays to launch the native
+interpreter directly. Use felidae.exe on Windows and felidae on Linux/macOS.
