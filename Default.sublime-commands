@@ -2,5 +2,18 @@
     {
         "caption": "Felidae: Format Document",
         "command": "felidae_format"
+    },
+    {
+        "caption": "Felidae: Check Document",
+        "command": "felidae_check"
+    },
+    {
+        "caption": "Felidae: Open REPL (needs the Terminus package)",
+        "command": "terminus_open",
+        "args": {
+            "cmd": ["felidae", "--repl"],
+            "cwd": "${file_path}",
+            "title": "Felidae REPL"
+        }
     }
 ]

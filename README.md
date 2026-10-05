@@ -17,9 +17,13 @@ directly on buffer text.
   line-for-line port of the same algorithm used by `vs-code-extension`'s
   "Format Document" and `intellij-idea-extension`'s "Format Felidae File",
   so all editors in this repository normalize `.fx` files the same way.
+- **Felidae: Check Document** (command palette) — runs `felidae --check-json` (nothing is
+  executed, no database is opened) and lists the problems in an output panel as
+  `file:line:column: severity: message`; double-click one, or press `F4` / `Shift+F4`, to jump to it.
+- **Felidae: Open REPL** (command palette; needs the [Terminus](https://packagecontrol.io/packages/Terminus)
+  package) — `felidae --repl` in a terminal tab, in the file's folder (the REPL reads `./init.fx`).
 - `Felidae.sublime-build` — `Tools > Build` runs the current file with
-  `felidae`; build variants (`Ctrl+Shift+B`) run `felidae --check`
-  and `celidae --html`.
+  `felidae`; the build variant (`Ctrl+Shift+B`) runs `celidae --html`.
 - A few starter snippets (`import`, `fact`, `function`, `class`, `for`, `while`, `switch`, `try`, `throw` and more) ported from
   `vs-code-extension/snippets/felidae.json`.
 
@@ -36,8 +40,9 @@ directory as `Felidae`:
 
 ## Configuration
 
-The build system's `felidae` / `celidae` commands are
+The `felidae_interpreter` setting (`Felidae.sublime-settings`, default `felidae`) is the
+executable used by *Felidae: Check Document*. The build system's `felidae` / `celidae` commands are
 resolved via `$PATH` by default. Edit `Felidae.sublime-build` (`Tools >
 Build System > Edit`) to point at absolute executable paths if they are not
-on `$PATH`. The build system and LSP use argument arrays to launch the native
+on `$PATH`. The build system uses argument arrays to launch the native
 interpreter directly. Use felidae.exe on Windows and felidae on Linux/macOS.

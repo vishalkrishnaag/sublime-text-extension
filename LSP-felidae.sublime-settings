@@ -3,6 +3,10 @@
 // to Packages/User/LSP-felidae.sublime-settings, or merge the "clients" entry
 // into your existing LSP.sublime-settings.
 //
+// NOTE: the current interpreter no longer provides `--lsp`, so this client
+// is disabled below; enable it only for a build that does. Use
+// Felidae: Check Document for diagnostics.
+//
 // `felidae --lsp` provides diagnostics, document symbols and
 // go-to-definition from the real parse. Everything in this package - syntax
 // highlighting, Felidae: Format Document, the build system - works without
@@ -12,7 +16,7 @@
 {
   "clients": {
     "felidae": {
-      "enabled": true,
+      "enabled": false,
       "command": ["felidae", "--lsp"],
       "selector": "source.felidae",
       "schemes": ["file"]

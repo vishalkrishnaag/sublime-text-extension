@@ -4,10 +4,6 @@
     "working_dir": "$file_path",
     "variants": [
         {
-            "name": "Check",
-            "cmd": ["felidae", "--check", "$file"]
-        },
-        {
             "name": "Visualize",
             "cmd": ["celidae", "--html", "$file"]
         }
