@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[def ${1:name}(${2:value}: ${3:any}) =>
+    ${4:expression}.
+end]]></content>
+    <tabTrigger>function</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Declare an implicit-result function</description>
+</snippet>

@@ -29,6 +29,15 @@ contexts:
           pop: true
 
   strings:
+    - match: "'"
+      scope: punctuation.definition.constant.begin.felidae
+      push:
+        - meta_scope: constant.language.atom.felidae
+        - match: "'"
+          scope: punctuation.definition.constant.end.felidae
+          pop: true
+        - match: $
+          pop: true
     - match: '"'
       scope: punctuation.definition.string.begin.felidae
       push:
@@ -44,7 +53,16 @@ contexts:
       scope: constant.numeric.felidae
 
   keywords:
-    - match: '\b(class|extend|where|if|else|return|lambda|then|end)\b'
+    # def declares a function, a binding or a fact; the first rule that fits wins.
+    - match: '\bdef\b(?=\s+[A-Za-z_][A-Za-z0-9_:.]*\s*\([^)]*\)\s*=>)'
+      scope: keyword.declaration.function.felidae
+    - match: '\bdef\b(?=\s+[A-Za-z_][A-Za-z0-9_]*\s*:)'
+      scope: keyword.declaration.variable.felidae
+    - match: '\bdef\b(?=\s+[A-Za-z_][A-Za-z0-9_:.]*\s*\()'
+      scope: keyword.declaration.struct.felidae
+    - match: '\bend\b'
+      scope: keyword.control.end.felidae
+    - match: '\b(def|class|extend|extends|index|where|if|else|then|for|in|while|switch|case|default|break|continue|try|catch|new|this|super|lambda)\b'
       scope: keyword.control.felidae
     - match: '\bimport\b'
       scope: keyword.control.import.felidae

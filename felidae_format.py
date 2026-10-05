@@ -19,6 +19,8 @@ bracket nesting, with multiple brackets opened on one line counting as a
 single extra level.
 """
 
+import re
+
 import sublime
 import sublime_plugin
 
@@ -77,32 +79,20 @@ def leading_width(line):
     return width
 
 
+BRANCH_RE = re.compile(r"(?:else\b|catch\b.*\bthen|case\b.*\bthen|default\s+then)\s*$")
+OPENS_BLOCK_RES = (
+    re.compile(r"\s*class\s+[A-Za-z_][A-Za-z0-9_.]*(?:\s+extends?\b.*)?\s*$"),
+    re.compile(r"\s*def\s+[A-Za-z_][A-Za-z0-9_.]*\s*\([^)]*\)\s*=>\s*$"),
+    re.compile(r"\s*(?:for\b.*\bthen|while\b.*\bthen|switch\b.*|try)\s*$"),
+)
+
+
 def opens_block(masked):
-    """True if MASKED ends with a depth-0 '=>' or word-boundary 'then' -
-    meaning this block's body continues on later lines. One with content
-    after the arrow/keyword on the same line (`Foo() => return`,
-    `if x then return 1`) is a complete inline block - nothing to open."""
-    local_depth = 0
-    tail_end = -1
-    length = len(masked)
-    i = 0
-    while i < length:
-        ch = masked[i]
-        if ch in OPENERS:
-            local_depth += 1
-        elif ch in CLOSERS:
-            local_depth -= 1
-        elif local_depth == 0:
-            if ch == "=" and i + 1 < length and masked[i + 1] == ">":
-                tail_end = i + 2
-            elif (
-                masked.startswith("then", i)
-                and (i == 0 or masked[i - 1].isspace())
-                and (i + 4 >= length or not (masked[i + 4].isalnum() or masked[i + 4] == "_"))
-            ):
-                tail_end = i + 4
-        i += 1
-    return tail_end >= 0 and masked[tail_end:].strip() == ""
+    """True for constructs that own an explicit 'end': class, 'def ... =>',
+    'for/while ... then', 'switch' and 'try'. A conditional 'then' expression
+    has no 'end', and branches (else/catch/case/default) continue the
+    surrounding frame instead of opening another one."""
+    return any(pattern.match(masked) for pattern in OPENS_BLOCK_RES)
 
 
 def format_lines(raw_lines):
@@ -123,7 +113,8 @@ def format_lines(raw_lines):
 
         masked = mask_line(raw_line)
         is_comment = trimmed.startswith("#")
-        is_bare_else = trimmed == "else"
+        is_branch = BRANCH_RE.match(trimmed) is not None
+        is_bare_end = trimmed == "end"
         # A comment's own column is only trustworthy as a dedent signal
         # when it opens a new paragraph (preceded by a blank line, or file
         # start) - a leading doc-comment for the next top-level
@@ -134,14 +125,19 @@ def format_lines(raw_lines):
 
         if raw_depth == 0 and (not is_comment or comment_trusts_column):
             width = leading_width(raw_line)
-            if is_bare_else:
+            if is_bare_end:
+                if frame_widths:
+                    frame_widths.pop()
+            elif is_branch:
                 while frame_widths and width < frame_widths[-1]:
                     frame_widths.pop()
             else:
                 while frame_widths and width <= frame_widths[-1]:
                     frame_widths.pop()
 
-        if is_bare_else and frame_widths:
+        if is_bare_end:
+            depth_units = len(frame_widths) + len(bracket_levels)
+        elif is_branch and frame_widths:
             depth_units = len(frame_widths) - 1 + len(bracket_levels)
         else:
             idx = 0

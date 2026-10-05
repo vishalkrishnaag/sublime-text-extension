@@ -1,6 +1,6 @@
 <snippet>
-    <content><![CDATA[${1:Predicate}(${2:name}: ${3:"value"})]]></content>
+    <content><![CDATA[def ${1:employee}(${2:id}: ${3:"e1"}, ${4:state}: ${5:active}).]]></content>
     <tabTrigger>fact</tabTrigger>
     <scope>source.felidae</scope>
-    <description>Create a Felidae fact</description>
+    <description>Declare a persistent fact seed</description>
 </snippet>

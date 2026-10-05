@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[def main() =>
+    ${1:expression}.
+end]]></content>
+    <tabTrigger>main</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Declare the program entry function</description>
+</snippet>

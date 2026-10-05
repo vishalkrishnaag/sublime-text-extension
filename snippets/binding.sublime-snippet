@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[def ${1:value}${2:: ${3:any}} := ${4:expression}.]]></content>
+    <tabTrigger>binding</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Declare an immutable interpreter binding</description>
+</snippet>

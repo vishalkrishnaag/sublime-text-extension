@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[Link(
+    from: ${1:left},
+    to: ${2:right},
+    properties: {${3:kind}: ${4:connected}}
+).]]></content>
+    <tabTrigger>link</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Create an instance graph link</description>
+</snippet>

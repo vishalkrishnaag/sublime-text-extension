@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[${1:left} = ${2:right} then ${3:value} else ${4:fallback}.]]></content>
+    <tabTrigger>condition</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Create a conditional expression</description>
+</snippet>

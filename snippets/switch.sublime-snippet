@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[switch ${1:value}
+case ${2:expected} then
+    ${3:expression}.
+default then
+    ${4:fallback}.
+end]]></content>
+    <tabTrigger>switch</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Create an explicit-break switch block</description>
+</snippet>

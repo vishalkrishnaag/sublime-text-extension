@@ -20,7 +20,7 @@ directly on buffer text.
 - `Felidae.sublime-build` — `Tools > Build` runs the current file with
   `felidae`; build variants (`Ctrl+Shift+B`) run `felidae --check`
   and `celidae --html`.
-- A few starter snippets (`import`, `fact`, `rule`, `method`) ported from
+- A few starter snippets (`import`, `fact`, `function`, `class`, `for`, `while`, `switch`, `try`, `throw` and more) ported from
   `vs-code-extension/snippets/felidae.json`.
 
 ## Installation

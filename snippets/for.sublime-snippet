@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[for ${1:item} in ${2:values} then
+    ${3:expression}.
+end]]></content>
+    <tabTrigger>for</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Iterate a list or lazy query cursor</description>
+</snippet>

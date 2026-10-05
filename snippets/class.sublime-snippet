@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[class ${1:entity}
+    key(${2:id}).
+    def ${2:id}: ${3:string}.
+    def ${4:enabled}: ${5:bool} := ${6:true}.
+end]]></content>
+    <tabTrigger>class</tabTrigger>
+    <scope>source.felidae</scope>
+    <description>Declare a RocksDB-backed fact schema</description>
+</snippet>
